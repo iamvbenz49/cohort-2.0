@@ -34,7 +34,7 @@ app.post("/signin", function (req, res) {
 
   if (!userExists(username, password)) {
     return res.status(403).json({
-      msg: "User doesnt exist in our in memory db",
+      msg: "User does]nt exist in our in memory db",
     });
   }
 
