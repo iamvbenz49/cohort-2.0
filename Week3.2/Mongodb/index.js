@@ -8,6 +8,9 @@ mongoose.connect("mongodb+srv://iamvbenz:22092004@cluster0.mbiqubl.mongodb.net/?
   
   
 
+let c = 12;
+
+
 const User = mongoose.model("Users", {name: String, email:String, password:String});
 
 const user = new User({
