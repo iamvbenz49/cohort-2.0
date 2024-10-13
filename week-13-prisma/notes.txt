@@ -1,0 +1,29 @@
+Prisma's include method fetches related records in a manner similar to how joins work in SQL, but it doesn't explicitly execute a SQL JOIN. 
+Instead, it performs an efficient query under the hood that retrieves the related data, sometimes using multiple queries.
+
+To enforce a real SQL JOIN in Prisma (i.e., doing everything in one query), you would need to rely on Prisma raw queries (prisma.$queryRaw),
+where you can explicitly write the SQL join if you want the database to handle it in one execution.
+
+Here's an example using a raw SQL query in Prisma for PostgreSQL:
+Scenario:
+
+You want to fetch users with their posts, where posts were created after January 1, 2024, using a proper JOIN.
+Prisma Raw Query:
+
+ts
+
+const usersWithPosts = await prisma.$queryRaw`
+  SELECT u.id, u.name, u.email, p.id AS postId, p.title, p.content, p.createdAt
+  FROM "User" u
+  JOIN "Post" p ON u.id = p.userId
+  WHERE p."createdAt" >= '2024-01-01'
+`;
+
+In this case:
+
+    We explicitly join the User and Post tables.
+    We filter the results based on the post's createdAt field.
+    The query uses proper SQL JOIN, so it behaves exactly as it would in plain SQL with PostgreSQL.
+
+This method ensures that you're leveraging SQL joins explicitly rather than relying on Prisma's abstractions.
+Would you prefer using raw queries like this, or are you more comfortable with Prisma's abstractions for other operations?
