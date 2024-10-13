@@ -1,0 +1,16 @@
+Creating a table
+
+CREATE TABLE users {
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+}
+
+When working with PostgreSQL, we need to create tables with unique primary keys. PostgreSQL offers a 
+powerful feature known as the SERIAL pseudo-type which simplifies generating auto-incrementing sequences 
+for columns.
+
+
+start a Postgres CLI 
+command - psql [URI]
+
